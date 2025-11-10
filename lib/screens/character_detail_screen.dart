@@ -2,7 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import '../models/character_model.dart';
-import '../models/enhanced_character_model.dart';
+
+class GachaProbabilityInfo {
+  final int rarity;
+  GachaProbabilityInfo({required this.rarity});
+  String get baseRate => rarity == 5 ? '0.6' : '5.1';
+  int get softPity => rarity == 5 ? 74 : 9;
+  int get hardPity => rarity == 5 ? 90 : 10;
+  String getExpectedPulls(bool guaranteed) => rarity == 5 
+      ? (guaranteed ? '~180 pulls' : '~90 pulls') 
+      : (guaranteed ? '~20 pulls' : '~10 pulls');
+}
 
 class CharacterDetailScreen extends StatelessWidget {
   final CharacterModel character;
